@@ -1,0 +1,31 @@
+tasks.register('hello') {
+    doLast {
+        println 'Hello world!'
+    }
+}
+tasks.register('upper') {
+    doLast {
+        String someString = 'mY_nAmE'
+        println "Original: $someString"
+        println "Upper case: ${someString.toUpperCase()}"
+    }
+}
+tasks.register('count') {
+    dependsOn tasks.hello
+    doLast {
+        10.times { print "$it " }
+    }
+}
+
+tasks.register('taskX') {
+    dependsOn 'taskY'
+    doLast {
+        println 'taskX'
+    }
+}
+tasks.register('taskY') {
+    //dependsOn 'taskX'
+    doLast {
+        println 'taskY'
+    }
+}
